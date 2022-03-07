@@ -1,3 +1,9 @@
+// only add `router.base = '/<repository_name>/'` if `DEPLOY_ENV` is `GH_PAGES`
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/<repository_name>/'
+  }
+} : {}
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   ssr: false,
@@ -14,7 +20,9 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-
+  router: {
+    base: '/<repository_name>/',
+  },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['element-ui/lib/theme-chalk/index.css', '@static/reset.css'],
 
@@ -45,5 +53,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/]
-  }
+  },
+  ...routerBase
 }
